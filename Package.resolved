@@ -1,0 +1,15 @@
+{
+  "originHash" : "d22e87d345ac35ee4d9e0a3969fcaacbce52d46d356c68d629ab842185775f3f",
+  "pins" : [
+    {
+      "identity" : "sincerepath",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DanielSincere/SincerePath",
+      "state" : {
+        "revision" : "816defdb39f95298c5062402b8b149dcd6c2ba70",
+        "version" : "0.0.2"
+      }
+    }
+  ],
+  "version" : 3
+}

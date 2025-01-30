@@ -1,0 +1,33 @@
+name: Build
+on:
+  push:
+    branches: "**"
+    pull_request: {}
+
+
+jobs:
+  build:
+    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-13
+            swift: "6.0"
+          - os: macos-14
+            swift: "6.0"
+          - os: macos-14
+            swift: "6.0"
+    steps:
+    - uses: swift-actions/setup-swift@v1
+      with:
+        swift-version: ${{ matrix.swift }}
+
+    - name: build
+      run: swift build -c release
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: .build
+        path: .build

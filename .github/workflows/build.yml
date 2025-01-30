@@ -4,6 +4,8 @@ on:
     branches: "**"
     pull_request: {}
 
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -23,16 +25,22 @@ jobs:
     - uses: SwiftyLab/setup-swift@latest
       with:
         swift-version: ${{ matrix.swift }}
-
-    - run: swift --version
     - uses: actions/checkout@v4
     - run: swift build -c release
-    - id: binary-path
-      run: echo "binary-path=$(swift build --show-bin-path -c release)" >> "$GITHUB_OUTPUT"
-    - uses: actions/upload-artifact@v4
+    - 
+      id: binary-path
+      run: echo "binary-path=$(swift build --show-bin-path -c release)/SincereMusicText" >> "$GITHUB_OUTPUT"
+    - 
+      uses: actions/upload-artifact@v4
       with:
         name: SincereMusicText.${{ matrix.os}}
-        path: ${{ steps.binary-path.outputs.binary-path }}/SincereMusicText
+        path: ${{ steps.binary-path.outputs.binary-path }}
+    - 
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
+      with:
+        generate_release_notes: true
+        files: ${{ steps.binary-path.outputs.binary-path }}
 
   test:
     name: Test Swift ${{ matrix.swift }} on ${{ matrix.os }}

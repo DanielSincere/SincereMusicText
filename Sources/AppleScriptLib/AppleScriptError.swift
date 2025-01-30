@@ -1,8 +1,8 @@
 import Foundation
 
-struct AppleScriptError: LocalizedError {
-  let info: Dictionary<String, String>
-  var errorDescription: String? {
+public struct AppleScriptError: LocalizedError {
+  public let info: Dictionary<String, String>
+  public var errorDescription: String? {
     return "\(info)"
   }
   

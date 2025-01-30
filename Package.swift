@@ -19,11 +19,14 @@ let package = Package(
       name: "SincereMusicText",
       dependencies: [
         "SincerePath",
+        "AppleScriptLib",
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ],
       resources: [
         .embedInCode("AppleScripts")
       ]
-    )
+    ),
+    .target(name: "AppleScriptLib", dependencies: []),
+    .testTarget(name: "AppleScriptLibTests", dependencies: ["AppleScriptLib"]),
   ]
 )

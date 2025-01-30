@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    name: Build Swift ${{ matrix.swift }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -32,4 +32,24 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: Release
-        path: ${{ steps.release-path.outputs.release-path }}
+        path: ${{ steps.release-path.outputs.release-path }}/SincereMusicText
+
+  test:
+    name: Test Swift ${{ matrix.swift }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-13
+            swift: "6.0"
+          - os: macos-14
+            swift: "6.0"
+          - os: macos-15
+            swift: "6.0"
+    steps:
+    - uses: SwiftyLab/setup-swift@latest
+      with:
+        swift-version: ${{ matrix.swift }}
+    - uses: actions/checkout@v4
+    - run: swift test

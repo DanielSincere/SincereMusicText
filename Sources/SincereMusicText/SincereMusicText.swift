@@ -11,9 +11,6 @@ struct SincereMusicText {
     try dir.createDirectories()
     try path.clear()
     
-    
-    String(data: Data(PackageResources.isPlaying_scpt), encoding: .utf8)
-    
     let appleMusic = try AppleMusic()
     while true {
       do {

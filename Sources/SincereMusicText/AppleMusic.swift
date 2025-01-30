@@ -1,4 +1,5 @@
 import Foundation
+import AppleScriptLib
 
 class AppleMusic {
   

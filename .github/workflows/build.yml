@@ -17,16 +17,16 @@ jobs:
             swift: "6.0"
           - os: macos-14
             swift: "6.0"
-          - os: macos-14
+          - os: macos-15
             swift: "6.0"
     steps:
-    - uses: swift-actions/setup-swift@v1
+    - uses: SwiftyLab/setup-swift@latest
       with:
         swift-version: ${{ matrix.swift }}
 
-    - name: build
-      run: swift build -c release
-
+    - run: swift --version
+    - uses: actions/checkout@v3
+    - run: swift build -c release
     - uses: actions/upload-artifact@v3
       with:
         name: .build

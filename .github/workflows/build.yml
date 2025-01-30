@@ -1,4 +1,5 @@
 name: Build
+
 on:
   push:
     branches: "**"
@@ -35,15 +36,6 @@ jobs:
       with:
         name: SincereMusicText.${{ matrix.os}}
         path: ${{ steps.binary-path.outputs.binary-path }}
-    - 
-      if: startsWith(github.ref, 'refs/tags/')
-      run: cp ${{ steps.binary-path.outputs.binary-path }} ./SincerePathText.${{ matrix.os}}
-    - 
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v2
-      with:
-        generate_release_notes: true
-        files: ./SincerePathText.${{ matrix.os}}
 
   test:
     name: Test Swift ${{ matrix.swift }} on ${{ matrix.os }}
@@ -64,3 +56,20 @@ jobs:
         swift-version: ${{ matrix.swift }}
     - uses: actions/checkout@v4
     - run: swift test
+
+  release:
+    name: Release
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: macos-15
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        path: ./artifacts
+        merge-multiple: true
+    - name: Display structure of downloaded files
+      run: ls -R ./artifacts
+    - 
+      uses: softprops/action-gh-release@v2
+      with:
+        generate_release_notes: true
+        files:  ./artifacts/*

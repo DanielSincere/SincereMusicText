@@ -27,12 +27,12 @@ jobs:
     - run: swift --version
     - uses: actions/checkout@v4
     - run: swift build -c release
-    - id: release-path
-      run: echo "release-path=$(swift build  --show-bin-path -c release)" >> "$GITHUB_OUTPUT"
+    - id: binary-path
+      run: echo "binary-path=$(swift build --show-bin-path -c release)" >> "$GITHUB_OUTPUT"
     - uses: actions/upload-artifact@v4
       with:
-        name: Release
-        path: ${{ steps.release-path.outputs.release-path }}/SincereMusicText
+        name: SincereMusicText.${{ matrix.os}}
+        path: ${{ steps.binary-path.outputs.binary-path }}/SincereMusicText
 
   test:
     name: Test Swift ${{ matrix.swift }} on ${{ matrix.os }}

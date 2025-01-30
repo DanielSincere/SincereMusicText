@@ -1,4 +1,5 @@
 public enum AppleMusicState: CustomStringConvertible {
+  
   case paused
   case playing(artist: String, track: String)
   

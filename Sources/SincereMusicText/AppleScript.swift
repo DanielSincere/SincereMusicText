@@ -3,6 +3,13 @@ import Foundation
 final class AppleScript {
   private let script: NSAppleScript
   
+  convenience init(_ bytes: [UInt8]) throws {
+    guard let source = String(data: Data(bytes), encoding: .utf8) else {
+      throw AppleScriptResourceError()
+    }
+    try self.init(source: source)
+  }
+  
   init(source: String) throws {
     guard let script = NSAppleScript(source: source) else {
       throw AppleScriptInitializationError()
@@ -39,6 +46,10 @@ final class AppleScript {
   
   struct AppleScriptInitializationError: LocalizedError {
     let errorDescription: String? = "Unexpectedly got `nil` when initializing an NSAppleScript object"
+  }
+  
+  struct AppleScriptResourceError: LocalizedError {
+    let errorDescription: String? = "Unexpectedly got `nil` when opening a script resource"
   }
   
   struct AppleScriptCompilationError: LocalizedError {

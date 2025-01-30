@@ -12,6 +12,8 @@ struct SincereMusicText {
     try path.clear()
     
     
+    String(data: Data(PackageResources.isPlaying_scpt), encoding: .utf8)
+    
     let appleMusic = try AppleMusic()
     while true {
       do {

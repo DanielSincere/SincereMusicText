@@ -20,6 +20,9 @@ let package = Package(
       dependencies: [
         "SincerePath",
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
+      ],
+      resources: [
+        .embedInCode("AppleScripts")
       ]
     )
   ]

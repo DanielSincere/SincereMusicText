@@ -27,7 +27,9 @@ jobs:
     - run: swift --version
     - uses: actions/checkout@v4
     - run: swift build -c release
+    - id: release-path
+      run: RELEASE_PATH=`swift build  --show-bin-path -c release` >> $GITHUB_OUTPUT
     - uses: actions/upload-artifact@v4
       with:
-        name: .build
-        path: ./.build
+        name: Release
+        path: ${{ steps.release-path.outputs.RELEASE_PATH }}

@@ -27,6 +27,8 @@ let package = Package(
     .target(name: "AppleMusicLib", 
       dependencies: ["AppleScriptLib"],
       resources: [.embedInCode("AppleScripts")]),
+    .testTarget(name: "AppleMusicLibTests",
+      dependencies: ["AppleMusicLib"]),
     .target(name: "AppleScriptLib", 
       dependencies: []),
     .testTarget(name: "AppleScriptLibTests", 

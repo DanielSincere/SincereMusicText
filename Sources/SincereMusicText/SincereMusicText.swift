@@ -12,7 +12,7 @@ struct SincereMusicText {
     try path.clear()
     
     
-    let appleMusic = AppleMusic()
+    let appleMusic = try AppleMusic()
     while true {
       do {
         let state = try appleMusic.current().description
@@ -24,6 +24,5 @@ struct SincereMusicText {
         print(error)
       }
     }
-    
   }
 }

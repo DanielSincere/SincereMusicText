@@ -1,16 +1,18 @@
 import Foundation
 
 struct AppleScriptError: LocalizedError {
-  let dict: Dictionary<String, String>
+  let info: Dictionary<String, String>
   var errorDescription: String? {
-    return "\(dict)"
+    return "\(info)"
   }
-  init(dict: Dictionary<String, String>) {
-    self.dict = dict
+  
+  init(info: Dictionary<String, String>) {
+    self.info = info
   }
-  init(nsdict: NSDictionary) {
-    self.dict = Dictionary(uniqueKeysWithValues: nsdict.allKeys.map { key in
-      (String(describing: key), String(describing: nsdict[key]))
+  
+  init(nsdictionary: NSDictionary) {
+    self.info = Dictionary(uniqueKeysWithValues: nsdictionary.allKeys.map { key in
+      (String(describing: key), String(describing: nsdictionary[key]))
     })
   }
 }

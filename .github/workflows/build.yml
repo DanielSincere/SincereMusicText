@@ -2,6 +2,8 @@ name: Build
 
 on:
   push:
+    tags:
+    - "v*.*.*"
     branches: "**"
     pull_request: {}
 
@@ -66,7 +68,6 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         path: ./artifacts
-        merge-multiple: true
     - name: Display structure of downloaded files
       run: ls -R ./artifacts
     - 

@@ -1,11 +1,15 @@
 import Foundation
 import SincerePath
 import AppleMusicLib
+import ArgumentParser
 
 @main
-struct SincereMusicText {
-
-  static func main() throws {
+struct SincereMusicText: ParsableCommand {
+  
+  @Option()
+  var interval: UInt32 = 5
+  
+  func run() throws {
     
     let dir: SincerePath = .home + "Documents/streaming.live"
     let path = dir + "current-state.txt"
@@ -13,13 +17,16 @@ struct SincereMusicText {
     try path.clear()
     
     let appleMusic = try AppleMusic()
+    var state: AppleMusicState? = nil
     while true {
       do {
-        let state = try appleMusic.currentState().description
-        print(state)
-        try path.write(state, encoding: .utf8)
-
-        sleep(5)
+        let newState = try appleMusic.currentState()
+        if newState != state {
+          try path.write(newState.description, encoding: .utf8)
+          print(newState.description)
+          state = newState
+        }
+        sleep(interval)
       } catch {
         print(error)
       }

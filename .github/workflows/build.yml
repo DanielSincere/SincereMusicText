@@ -70,8 +70,15 @@ jobs:
         path: ./artifacts
     - name: Display structure of downloaded files
       run: ls -R ./artifacts
+
+    - run: mkdir ./release
+    - run: cp ./artifacts/SincereMusicText.macos-13/SincereMusicText ./release/SincereMusicText.macos-13
+    - run: cp ./artifacts/SincereMusicText.macos-14/SincereMusicText ./release/SincereMusicText.macos-14
+    - run: cp ./artifacts/SincereMusicText.macos-15/SincereMusicText ./release/SincereMusicText.macos-15
+    - name: Display structure of release files
+      run: ls -R ./release
     - 
       uses: softprops/action-gh-release@v2
       with:
         generate_release_notes: true
-        files:  ./artifacts/**
+        files:  ./release/*

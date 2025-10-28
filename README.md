@@ -1,5 +1,7 @@
 # Sincere Music Text
 
+⚠️‼️**Tahoe breaks getting Music info using AppleScript, which breaks this tool.** [See here](https://www.macscripter.net/t/scripting-changes-or-lack-thereof-in-macos-tahoe/77173/3)⚠️‼️
+
 Update a file with the current artist and song name, playing in Apple Music, for OBS to display in a text field.
 
 A command-line app that writes the current artist and song name, playing in Apple Music, for OBS to display in a text field. 
